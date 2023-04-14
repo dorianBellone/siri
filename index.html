@@ -11,8 +11,6 @@
       <input type="text" id="url" name="url"><br><br>
       <label for="requestorRef">Requestor Ref :</label>
       <input type="text" id="requestorRef" name="requestorRef"><br><br>
-      <label for="fleet">Fleet :</label>
-      <input type="text" id="fleet" name="fleet"><br><br>
 	<label for="stopid">stopId :</label>
       <input type="text" id="stopid" name="stopid"><br><br>
 	<label for="version">Version :</label>
@@ -28,7 +26,6 @@
       function sendRequest() {
         const url = document.getElementById("url").value;
         const requestorRef = document.getElementById("requestorRef").value;
-        const fleet = document.getElementById("fleet").value;
 
         const xml = `<?xml version="1.0" encoding="UTF-8"?>
         <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
