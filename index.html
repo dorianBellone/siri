@@ -49,6 +49,7 @@
         </S:Envelope>`;
 
         document.getElementById("request").textContent = xml;
+	  console.log(xml);
 
         fetch(url, {
           method: "POST",
