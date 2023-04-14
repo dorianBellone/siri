@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test requete siri</title>
+  </head>
+  <body>
+    <h1>Test requete siri</h1>
+    <form>
+      <label for="url">URL :</label>
+      <input type="text" id="url" name="url"><br><br>
+      <label for="requestorRef">Requestor Ref :</label>
+      <input type="text" id="requestorRef" name="requestorRef"><br><br>
+      <label for="fleet">Fleet :</label>
+      <input type="text" id="fleet" name="fleet"><br><br>
+	<label for="version">Version :</label>
+      <input type="text" id="version" name="version"><br><br>
+      <button type="button" onclick="sendRequest()">Send request</button>
+    </form>
+    <hr>
+    <h2>Request:</h2>
+    <pre id="request"></pre>
+    <h2>Response:</h2>
+    <pre id="response"></pre>
+    <script>
+      function sendRequest() {
+        const url = document.getElementById("url").value;
+        const requestorRef = document.getElementById("requestorRef").value;
+        const fleet = document.getElementById("fleet").value;
+
+        const xml = `<?xml version="1.0" encoding="UTF-8"?>
+        <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+          <S:Body>
+            <sw:GetStopMonitoring xmlns:sw="http://wsdl.siri.org.uk" xmlns:siri="http://www.siri.org.uk/siri">
+              <ServiceRequestInfo>
+                <siri:RequestTimestamp>2023-04-14T16:47:13.361142Z</siri:RequestTimestamp>
+                <siri:RequestorRef>${requestorRef}</siri:RequestorRef>
+                <siri:MessageIdentifier>Test::Message::f59c7cf2-6904-4397-b3f1-b96f67ef06b0</siri:MessageIdentifier>
+              </ServiceRequestInfo>
+              <Request>
+                <siri:RequestTimestamp>2023-04-14T16:47:13.361142Z</siri:RequestTimestamp>
+                <siri:MessageIdentifier>Test::Message::f59c7cf2-6904-4397-b3f1-b96f67ef06b0</siri:MessageIdentifier>
+                <siri:MonitoringRef>${fleet}</siri:MonitoringRef>
+              </Request>
+            </sw:GetStopMonitoring>
+          </S:Body>
+        </S:Envelope>`;
+
+        document.getElementById("request").textContent = xml;
+
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/xml",
+          },
+          body: xml,
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("response").textContent = data;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    </script>
+    <style>
+      #response {
+        width: 100%;
+        height: 500px;
+        overflow: scroll;
+      }
+    </style>
+  </body>
+</html>
