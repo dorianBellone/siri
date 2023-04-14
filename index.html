@@ -28,6 +28,7 @@
         const requestorRef = document.getElementById("requestorRef").value;
 	  const stopid = document.getElementById("stopid").value;
         const version = document.getElementById("version").value;
+	  const { fetch, Request, Response, Headers } = require('fetch-ponyfill')();
 
 
         const xml = `<?xml version="1.0" encoding="UTF-8"?>
