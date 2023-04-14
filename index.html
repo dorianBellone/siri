@@ -3,6 +3,7 @@
 <html>
   <head>
     <title>Test requete siri</title>
+    <script src="./fetch-node.js"></script>
   </head>
   <body>
     <h1>Test requete siri</h1>
@@ -23,6 +24,7 @@
     <h2>Response:</h2>
     <pre id="response"></pre>
     <script>
+	const { fetch } = window.fetchPonyfill({});
       function sendRequest() {
         const url = document.getElementById("url").value;
         const requestorRef = document.getElementById("requestorRef").value;
