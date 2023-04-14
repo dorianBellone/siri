@@ -28,8 +28,6 @@
         const requestorRef = document.getElementById("requestorRef").value;
 	  const stopid = document.getElementById("stopid").value;
         const version = document.getElementById("version").value;
-	  const { fetch, Request, Response, Headers } = require('fetch-ponyfill')();
-
 
         const xml = `<?xml version="1.0" encoding="UTF-8"?>
         <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
@@ -53,7 +51,6 @@
 
 	  const proxyUrl = "https://cors-anywhere.herokuapp.com/";
         const targetUrl = `https://siri-44p8.vercel.app/${url}`;
-        const fetch = window.fetchPonyfill();
 
         fetch(`${proxyUrl}${targetUrl}`, {
           method: "POST",
