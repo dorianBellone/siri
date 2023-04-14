@@ -13,7 +13,7 @@
       <input type="text" id="requestorRef" name="requestorRef"><br><br>
       <label for="fleet">Fleet :</label>
       <input type="text" id="fleet" name="fleet"><br><br>
-	<label for="id">stopId :</label>
+	<label for="stopId">stopId :</label>
       <input type="text" id="stopId" name="stopId"><br><br>
 	<label for="version">Version :</label>
       <input type="text" id="version" name="version"><br><br>
@@ -42,7 +42,7 @@
               <Request version="${version}">
                 <siri:RequestTimestamp>2023-04-14T16:47:13.361142Z</siri:RequestTimestamp>
                 <siri:MessageIdentifier>Test::Message::f59c7cf2-6904-4397-b3f1-b96f67ef06b0</siri:MessageIdentifier>
-                <siri:MonitoringRef>${id}</siri:MonitoringRef>
+                <siri:MonitoringRef>${stopid}</siri:MonitoringRef>
               </Request>
             </sw:GetStopMonitoring>
           </S:Body>
