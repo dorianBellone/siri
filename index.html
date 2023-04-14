@@ -55,6 +55,7 @@
             "Content-Type": "application/xml"
           },
           body: xml,
+	    mode: "no-cors"
         })
           .then((response) => response.text())
           .then((data) => {
