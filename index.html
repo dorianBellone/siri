@@ -49,13 +49,15 @@
         </S:Envelope>`;
 
         document.getElementById("request").textContent = xml;
-	  console.log(xml);
 
-        fetch(url, {
+	  const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+        const targetUrl = `https://siri-44p8.vercel.app/${url}`;
+        const fetch = window.fetchPonyfill();
+
+        fetch(`${proxyUrl}${targetUrl}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/xml",
-		"Access-Control-Allow-Origin": "*",
 		"X-Requested-With": "XMLHttpRequest"
           },
           body: xml,
