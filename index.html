@@ -48,11 +48,11 @@
         </S:Envelope>`;
 
         document.getElementById("request").textContent = xml;
-        fetch(url, {
+        
+	  fetch(url, {
           method: "POST",
           headers: {
-            "Content-Type": "application/xml",
-		"X-Requested-With": "XMLHttpRequest"
+            "Content-Type": "application/xml"
           },
           body: xml,
         })
