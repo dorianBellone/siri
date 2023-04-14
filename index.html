@@ -26,6 +26,9 @@
       function sendRequest() {
         const url = document.getElementById("url").value;
         const requestorRef = document.getElementById("requestorRef").value;
+	  const stopid = document.getElementById("stopid").value;
+        const version = document.getElementById("version").value;
+
 
         const xml = `<?xml version="1.0" encoding="UTF-8"?>
         <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
