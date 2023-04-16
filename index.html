@@ -43,7 +43,7 @@
             document.getElementById("response").textContent = data;
           },
           error: function(jqXHR, textStatus, errorThrown) {
-                console.error("Error:", jqXHR, textStatus, errorThrown);
+                console.error("Error:", jqXHR.status, jqXHR.statusText, jqXHR.responseText);
     	    }
         });
       }
