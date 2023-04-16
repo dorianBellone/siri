@@ -2,25 +2,6 @@
 <html>
   <head>
     <title>Test requete siri</title>
-  </head>
-  <body>
-    <h1>Test requete siri</h1>
-    <form>
-      <label for="url">URL :</label>
-      <input type="text" id="url" name="url"><br><br>
-      <label for="requestorRef">Requestor Ref :</label>
-      <input type="text" id="requestorRef" name="requestorRef"><br><br>
-      <label for="stopid">stopId :</label>
-      <input type="text" id="stopid" name="stopid"><br><br>
-      <label for="version">Version :</label>
-      <input type="text" id="version" name="version"><br><br>
-      <button type="button" onclick="sendRequest()">Send request</button>
-    </form>
-    <hr>
-    <h2>Request:</h2>
-    <pre id="request"></pre>
-    <h2>Response:</h2>
-    <pre id="response"></pre>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       function sendRequest() {
@@ -67,3 +48,24 @@
     	    }
         });
       }
+    </script>
+  </head>
+  <body>
+    <h1>Test requete siri</h1>
+    <form>
+      <label for="url">URL :</label>
+      <input type="text" id="url" name="url"><br><br>
+      <label for="requestorRef">Requestor Ref :</label>
+      <input type="text" id="requestorRef" name="requestorRef"><br><br>
+      <label for="stopid">stopId :</label>
+      <input type="text" id="stopid" name="stopid"><br><br>
+      <label for="version">Version :</label>
+      <input type="text" id="version" name="version"><br><br>
+      <button type="button" onclick="sendRequest()">Send request</button>
+    </form>
+    <hr>
+    <h2>Request:</h2>
+    <pre id="request"></pre>
+    <h2>Response:</h2>
+    <pre id="response"></pre>
+  </body>
