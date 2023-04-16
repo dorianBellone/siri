@@ -1,4 +1,3 @@
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <!DOCTYPE html>
 <html>
   <head>
@@ -11,9 +10,9 @@
       <input type="text" id="url" name="url"><br><br>
       <label for="requestorRef">Requestor Ref :</label>
       <input type="text" id="requestorRef" name="requestorRef"><br><br>
-	<label for="stopid">stopId :</label>
+      <label for="stopid">stopId :</label>
       <input type="text" id="stopid" name="stopid"><br><br>
-	<label for="version">Version :</label>
+      <label for="version">Version :</label>
       <input type="text" id="version" name="version"><br><br>
       <button type="button" onclick="sendRequest()">Send request</button>
     </form>
@@ -22,11 +21,12 @@
     <pre id="request"></pre>
     <h2>Response:</h2>
     <pre id="response"></pre>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       function sendRequest() {
         const url = document.getElementById("url").value;
         const requestorRef = document.getElementById("requestorRef").value;
-	  const stopid = document.getElementById("stopid").value;
+        const stopid = document.getElementById("stopid").value;
         const version = document.getElementById("version").value;
 
         const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -48,32 +48,22 @@
         </S:Envelope>`;
 
         document.getElementById("request").textContent = xml;
-        
-	  fetch(url, {
-          method: "POST",
+
+        $.ajax({
+          url: url,
+          type: "POST",
+          dataType: "text",
+          data: xml,
           headers: {
-      	"Content-Type": "text/xml",
-      	"Accept-Encoding": "utf-8",
-      	"SOAPAction": "GetStopMonitoring"
+            "Content-Type": "text/xml",
+            "Accept-Encoding": "utf-8",
+            "SOAPAction": "GetStopMonitoring",
           },
-          body: xml,
-	    mode: "no-cors"
-        })
-          .then((response) => response.text())
-          .then((data) => {
+          success: function(data) {
             document.getElementById("response").textContent = data;
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.error("Error:", errorThrown);
+    	    }
+        });
       }
-    </script>
-    <style>
-      #response {
-        width: 100%;
-        height: 500px;
-        overflow: scroll;
-      }
-    </style>
-  </body>
-</html>
