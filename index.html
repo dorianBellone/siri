@@ -33,7 +33,8 @@
          fetch(url, {
           method: "POST",
           headers: {
-            "Content-Type": "application/xml"
+            "Content-Type": "application/xml",
+            "Access-Control-Allow-Headers": "*"
           },
           body: xml
         })
