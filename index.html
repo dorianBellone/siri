@@ -30,22 +30,24 @@
 
         document.getElementById("request").textContent = xml;
 
-        $.ajax({
-          url: url,
-          type: "POST",
-          dataType: "jsonp",
-          data: xml,
-          headers: {
-            "Content-Type": "application/xml",
-            "SOAPAction": "GetStopMonitoring",
-          },
-          success: function(data) {
+         fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "text/xml",
+              "Accept-Encoding": "utf-8",
+              "SOAPAction": "GetStopMonitoring"
+            },
+            body: xml,
+            mode: "no-cors"
+          })
+          .then((response) => response.text())
+          .then((data) => {
             document.getElementById("response").textContent = data;
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-                console.error("Error:", jqXHR.status, jqXHR.statusText, jqXHR.responseText);
-    	    }
-        });
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+        }
       }
     </script>
   </head>
