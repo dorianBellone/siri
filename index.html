@@ -9,9 +9,25 @@
         const requestorRef = document.getElementById("requestorRef").value;
         const stopid = document.getElementById("stopid").value;
         const version = document.getElementById("version").value;
+        const method = document.getElementById("method").value;
         let xml;
-        if (method === "GetStopMonitoring") {
-           xml = `<?xml version="1.0" encoding="UTF-8"?>
+        
+        switch (method) {
+          case "CheckStatus":
+            xml += `<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+        <S:Body>
+          <sw:CheckStatus xmlns:sw="http://wsdl.siri.org.uk" xmlns:siri="http://www.siri.org.uk/siri">
+            <Request>
+              <siri:RequestTimestamp>2023-04-21T07:31:13.819082Z</siri:RequestTimestamp>
+              <siri:RequestorRef>${requestorRef}</siri:RequestorRef>
+              <siri:MessageIdentifier>Test::Message::82c4fe9e-e670-44e3-9056-970e24c45e1b</siri:MessageIdentifier>
+            </Request>
+          </sw:CheckStatus>
+        </S:Body>
+      </S:Envelope>`;
+            break;
+          case "GetStopMonitoring":
+            xml += `<?xml version="1.0" encoding="UTF-8"?>
         <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
           <S:Body>
             <sw:GetStopMonitoring xmlns:sw="http://wsdl.siri.org.uk" xmlns:siri="http://www.siri.org.uk/siri">
@@ -28,29 +44,14 @@
             </sw:GetStopMonitoring>
           </S:Body>
         </S:Envelope>`;
-        }
-        
-        if (method === "CheckStatus") {
-         xml = `<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
-        <S:Body>
-          <sw:CheckStatus xmlns:sw="http://wsdl.siri.org.uk" xmlns:siri="http://www.siri.org.uk/siri">
-            <Request>
-              <siri:RequestTimestamp>2023-04-21T07:31:13.819082Z</siri:RequestTimestamp>
-              <siri:RequestorRef/>
-              <siri:MessageIdentifier>Test::Message::82c4fe9e-e670-44e3-9056-970e24c45e1b</siri:MessageIdentifier>
-            </Request>
-          </sw:CheckStatus>
-        </S:Body>
-      </S:Envelope>`;
-        }
-        
-        if (method === "GetGeneralMessage") {
-           xml = `<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+            break;
+          case "GetGeneralMessage":
+            xml += `<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
             <S:Body>
               <sw:GetGeneralMessage xmlns:sw="http://wsdl.siri.org.uk" xmlns:siri="http://www.siri.org.uk/siri">
                 <ServiceRequestInfo>
                   <siri:RequestTimestamp>2023-04-21T07:40:46.377285Z</siri:RequestTimestamp>
-                  <siri:RequestorRef/>
+                  <siri:RequestorRef>${requestorRef}</siri:RequestorRef>
                   <siri:MessageIdentifier>Test::Message::7797abc1-961a-4cf6-9b99-b0dc878f3b3d</siri:MessageIdentifier>
                 </ServiceRequestInfo>
                 <Request>
@@ -60,37 +61,37 @@
               </sw:GetGeneralMessage>
             </S:Body>
           </S:Envelope>`;
-        }
-        
-        if (method === "LinesDiscovery") {
-          xml = `<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+            break;
+          case "LinesDiscovery":
+            xml += `<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
             <S:Body>
               <sw:LinesDiscovery xmlns:sw="http://wsdl.siri.org.uk" xmlns:siri="http://www.siri.org.uk/siri">
                 <Request>
                   <siri:RequestTimestamp>2023-04-21T07:41:38.982457Z</siri:RequestTimestamp>
-                  <siri:RequestorRef/>
+                  <siri:RequestorRef>${requestorRef}</siri:RequestorRef>
                   <siri:MessageIdentifier>Test::Message::a854ea59-8246-4c38-87af-44c33b1239ed</siri:MessageIdentifier>
                 </Request>
               </sw:LinesDiscovery>
             </S:Body>
           </S:Envelope>`;
-        }
-        
-        if (method === "StopPointsDiscovery") {
-          xml = `<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+            break;
+          case "StopPointsDiscovery":
+            xml += `<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
               <S:Body>
                 <sw:StopPointsDiscovery xmlns:sw="http://wsdl.siri.org.uk" xmlns:siri="http://www.siri.org.uk/siri">
                   <Request>
                     <siri:RequestTimestamp>2023-04-21T07:42:01.723646Z</siri:RequestTimestamp>
-                    <siri:RequestorRef/>
+                    <siri:RequestorRef>${requestorRef}</siri:RequestorRef>
                     <siri:MessageIdentifier>Test::Message::a39af1b3-dda3-4b90-952a-045e5a5f3de1</siri:MessageIdentifier>
                   </Request>
                 </sw:StopPointsDiscovery>
               </S:Body>
             </S:Envelope>`;
-        }
+            break;
+          default:
+            console.error("Invalid method selected.");
+            return;
         
-
         document.getElementById("request").textContent = xml;
 
          fetch(url, {
